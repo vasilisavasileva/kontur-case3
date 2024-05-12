@@ -2,14 +2,27 @@ from typing import Union
 
 from fastapi import FastAPI
 
+from some_ml import *
+
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+@app.get("/decisionTree")
+def decisionTree_handler():
+    score, report, tree = decisionTree(X_train, X_test, y_train, y_test)
+    return { "score": score, "report": report, "tree": tree }
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+
+
+@app.get("/neuralNet")
+def neuralNet_handler():
+    score, report, clf = neuralNet(X_train, X_test, y_train, y_test)
+    return { "score": score, "report": report, "clf": clf }
+
+
+
+@app.get("/Knn_Classifier")
+def Knn_Classifier_handler():
+    score, report, clf = Knn_Classifier(X_train, X_test, y_train, y_test)
+    return { "score": score, "report": report, "clf": clf }
