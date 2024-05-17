@@ -1,4 +1,0 @@
-# .dockerignore
-.venv
-.env*
-bin/
